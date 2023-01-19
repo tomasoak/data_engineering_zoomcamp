@@ -12,7 +12,7 @@ Using <strong>cutting-edge</strong> and in-high demand <strong>technology</stron
 - [Terraform](https://www.terraform.io/): Infrastructure-as-Code (IaC)
 - [Docker](https://www.docker.com/): Containerization
 - [SQL](https://en.wikipedia.org/wiki/SQL): Data Analysis & Exploration
-- [Airflow](https://airflow.apache.org/): Pipeline Orchestration
+- [Prefect](https://www.prefect.io/): Pipeline Orchestration
 - [dbt](https://www.getdbt.com/): Data Transformation
 - [Spark](https://spark.apache.org/): Distributed Processing
 - [Kafka](https://kafka.apache.org/): Streaming
