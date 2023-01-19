@@ -1,4 +1,5 @@
-# Data Engineering Zoomcamp
+<h1 align="center"> Data Engineering Zoomcamp</h1>
+
 10-week bootcamp-style course from DataTalksClub
 
 <br>
@@ -25,5 +26,5 @@ Implement the following architecture
 
 <br>
 
-### Official source from Data
+#### Official source from Data Talks Club
 https://github.com/DataTalksClub/data-engineering-zoomcamp
