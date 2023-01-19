@@ -3,6 +3,15 @@
 
 <br>
 
+## Goals
+Implement the following architecture
+
+<br>
+
+<img title="Architecture" alt="" src="https://github.com/tomasoak/dataeng_zoomcamp/blob/main/project_architecture.jpg" height=700, width=700></img>
+
+<br>
+
 ## Week 1: Introduction & Prerequisites
 - Course overview
 - Introduction to GCP
