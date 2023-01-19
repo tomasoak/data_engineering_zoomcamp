@@ -1,6 +1,21 @@
 <h1 align="center"> Data Engineering Zoomcamp</h1>
 
-10-week bootcamp-style course from DataTalksClub
+This repository was created to follow the 10-week bootcamp-style Data Engineering course from DataTalksClub. <br>
+Using <strong>cutting-edge</strong> and in-high demand <strong>technology</strong>, it implements an architecture that <strong>mimics</strong> what is the scope of a <strong>Data Engineer</strong>.
+
+<br>
+
+## Technologies
+- [Google Cloud Platform (GCP)](https://cloud.google.com/): Cloud-based auto-scaling platform by Google
+- [Google Cloud Storage (GCS)](https://cloud.google.com/storage): Data Lake
+- [BigQuery](https://cloud.google.com/bigquery): Data Warehouse
+- [Terraform](https://www.terraform.io/): Infrastructure-as-Code (IaC)
+- [Docker](https://www.docker.com/): Containerization
+- [SQL](https://en.wikipedia.org/wiki/SQL): Data Analysis & Exploration
+- [Airflow](https://airflow.apache.org/): Pipeline Orchestration
+- [dbt](https://www.getdbt.com/): Data Transformation
+- [Spark](https://spark.apache.org/): Distributed Processing
+- [Kafka](https://kafka.apache.org/): Streaming
 
 <br>
 
@@ -25,6 +40,8 @@ Implement the following architecture
 [More Details]()
 
 <br>
+
+___
 
 #### Official source from Data Talks Club
 https://github.com/DataTalksClub/data-engineering-zoomcamp
