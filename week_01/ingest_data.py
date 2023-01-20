@@ -22,10 +22,16 @@ def main(params):
     engine = create_engine(conexion)
 
     # "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet"
-    df = pd.read_parquet(url)
-    print(df.head(3))
+    # homework:
+    # "https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2019-01.parquet"
+    if url.endswith("parquet"):
+        df = pd.read_parquet(url)
+    elif url.endswith("csv"):
+        df = pd.read_csv(url)
 
     df.to_sql(name=table_name, con=engine, if_exists="append")
+
+    
 
 
 if __name__ == '__main__':
