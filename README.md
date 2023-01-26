@@ -37,7 +37,7 @@ Implement the following architecture
 - Preparing the environment for the course
 - Homework
 
-[More Details]()
+[More Details](https://github.com/tomasoak/dataeng_zoomcamp/tree/main/week_01)
 
 <br>
 
