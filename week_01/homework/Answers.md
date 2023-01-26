@@ -69,12 +69,33 @@ ORDER BY 2 desc
 <br>
 
 ## Question 5.
-
+```
+SELECT passenger_count, count(*)
+FROM public.green_taxi_trips  a
+WHERE CAST(lpep_pickup_datetime AS DATE) = '2019-01-01'
+GROUP BY 1
+```
 <br>
 
 ## Question 6.
-
+```
+WITH astoria_pickup AS (
+	SELECT * 
+	FROM green_taxi_trips a 
+	JOIN taxi_zone b ON a."PULocationID"  = b."LocationID" 
+	WHERE b."Zone" = 'Astoria'
+), drop_up AS (
+	SELECT a."Zone" AS zone_astoria, b."Zone" AS dropoff, tip_amount  
+	FROM astoria_pickup a
+	JOIN taxi_zone b ON a."DOLocationID" = b."LocationID" 
+	WHERE b."Zone" != 'Astoria'
+)
+SELECT zone_astoria, dropoff, SUM(tip_amount) AS tip
+FROM drop_up
+GROUP BY 1, 2
+ORDER BY 3 DESC
+```
 <br>
 
-## Learning in public links
+## Learning in public: social media links
 [Start](https://www.linkedin.com/feed/update/urn:li:activity:7020835983008903168/)
