@@ -1,1 +1,4 @@
 *.parquet*
+*.json
+*tar.gz
+*google-cloud-sdk*
