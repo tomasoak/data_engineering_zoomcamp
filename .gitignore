@@ -2,3 +2,6 @@
 *.json
 *tar.gz
 *google-cloud-sdk*
+*.terraform*
+*venv*
+*terraform.tfstate*
