@@ -1,13 +1,3 @@
-terraform {
-  required_version = ">= 1.0"
-  backend "local" {}
-  required_providers {
-    google = {
-      source = "hashicorp/google"
-    }
-  }
-}
-
 locals {
   data_lake_bucket = "dtc_data_lake"
 }
@@ -35,5 +25,5 @@ variable "BQ_DATASET" {
 
 variable "credentials" {
   type = string
-  default = "/home/tomasoak/dataeng_zoomcamp/explorer-363509-9bf8f121680a.json"
+  default = "~/dataeng_zoomcamp/explorer-363509-9bf8f121680a.json"
 }
