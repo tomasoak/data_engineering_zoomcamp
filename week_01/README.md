@@ -93,10 +93,30 @@ sudo apt update && sudo apt install terraform
 ### 7. Install Google Cloud SK
 https://cloud.google.com/sdk/docs/install#linux
 ```
-export GOOGLE_APPLICATION_CREDENTIALS="/home/tomasoak/dataeng_zoomcamp/<xxxxx>.json"
+export GOOGLE_APPLICATION_CREDENTIALS="~/dataeng_zoomcamp/<xxxxx>.json"
 ```
 
 ### 8. Running Terraform with GCP
+run the following command in the same location `main.tf` and `variables.tf` files are located
 ```
 terraform init
+```
+
+### 9. Run planning, which outputs Terraform is going to create or modify in our infrastructure (note that it will not apply anything, it just shows us what is going to be done if we decide to apply the changes). This command will ask us to inform the gcp project id variable.
+```
+terraform plan
+```
+
+### 10. Apply the changes.
+```
+terraform apply
+```
+The output of the terraform apply command must be something similar to:
+```
+google_bigquery_dataset.dataset: Creating...
+google_storage_bucket.data-lake-bucket: Creating...
+google_bigquery_dataset.dataset: Creation complete after 3s [id=projects/explorer-363509/datasets/trips_data_all]
+google_storage_bucket.data-lake-bucket: Creation complete after 4s [id=dtc_data_lake_explorer-363509]
+
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
 ```
