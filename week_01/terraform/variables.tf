@@ -3,7 +3,7 @@ locals {
 }
 
 variable "project" {
-  description = "explorer-363509"  #project ID
+  description = "canvas-provider-376717"  #project ID
 }
 
 variable "region" {
@@ -25,5 +25,5 @@ variable "BQ_DATASET" {
 
 variable "credentials" {
   type = string
-  default = "~/dataeng_zoomcamp/explorer-363509-9bf8f121680a.json"
+  default = "~/dataeng_zoomcamp/canvas-provider-376717-e57799392c50.json"
 }
