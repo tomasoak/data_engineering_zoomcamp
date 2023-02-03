@@ -136,3 +136,88 @@ ssh-keygen -t rsa -f gcp -C tomasoak -b 2048
 Then
 `cat gcp.pub`
 and copy to `Metadata` on GCP
+
+### 12. Create VM machine
+- Machine type: `e2-standard-4 (4 vCPU, 16 GB Memory)`
+- Image: Ubutu 20.04 LTS 
+
+### 13. Connect local env to VM via ssh
+ssh -i ~/.ssh/<private_key> <name_used>@<VM_external_IP>
+
+```
+cd ~
+ssh -i ~/.ssh/gcp tomasoak@34.88.193.200
+```
+
+### 14. Create config file
+```
+cd ~/.ssh
+touch config
+vim config
+```
+Inside config insert:
+```
+Host de-zoomcamp
+  HostName 34.88.193.200
+  User tomasoak
+  IdentityFile /home/tomasoak/.ssh/gcp
+```
+
+### 15. Install Anaconda inside VM
+```
+wget https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh
+bash Anaconda3-2022.10-Linux-x86_64.sh 
+```
+
+### 16. Update apt and install docker
+```
+sudo apt-get update
+sudo apt install docker.io
+```
+
+### 17. Clone course repo
+```
+git clone https://github.com/tomasoak/dataeng_zoomcamp.git
+```
+
+### 18. Docker without sudo 
+```
+sudo groupadd docker
+sudo gpasswd -a $USER docker
+sudo service docker restart
+```
+
+### 19. Install Docker-Compose
+```
+mkdir bin
+cd bin/
+wget https://github.com/docker/compose/releases/download/v2.15.1/docker-compose-linux-x86_64 -O docker-compose
+chmod +x docker-compose
+```
+
+### 20. Add shortcut to docker-compose
+```
+nano .bashrc
+```
+
+in the end add:
+
+```
+export PATH="{$HOME}/bin:${PATH}"
+```
+press CTRL+O and Enter -> to save
+<br>
+press CTRL+X to quit
+
+
+### 21. Download postgres image
+```
+cd dataeng_zoomcamp/week_01
+docker-compose up -d
+```
+
+### 22. Install pgcli
+```
+pip install pgcli
+pgcli -h localhost -U root -d ny_taxi 
+```
