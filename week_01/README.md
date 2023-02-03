@@ -90,10 +90,16 @@ echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://
 sudo apt update && sudo apt install terraform
 ```
 
-### 7. Install Google Cloud SK
+### 7. Install Google Cloud SK and login
 https://cloud.google.com/sdk/docs/install#linux
+
+### 7.a Create Service Account, Key and login
+In Service account, add following roles: `Viewer`, `Storage Admin`, `Storage Object Admin`, `BigQuery Admin`
+
 ```
 export GOOGLE_APPLICATION_CREDENTIALS="~/dataeng_zoomcamp/<xxxxx>.json"
+
+gcloud auth application-default login
 ```
 
 ### 8. Running Terraform with GCP
@@ -120,3 +126,13 @@ google_storage_bucket.data-lake-bucket: Creation complete after 4s [id=dtc_data_
 
 Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
 ```
+
+
+### 11. Add local SSH key to connect to GCP
+```
+cd ~/.ssh
+ssh-keygen -t rsa -f gcp -C tomasoak -b 2048
+```
+Then
+`cat gcp.pub`
+and copy to `Metadata` on GCP
