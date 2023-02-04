@@ -278,3 +278,8 @@ terraform init
 terraform plan
 terraform apply
 ```
+
+### 26. Shutdown
+```bash
+sudo shutdown now
+```
