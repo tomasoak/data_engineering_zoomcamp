@@ -4,6 +4,7 @@ locals {
 
 variable "project" {
   description = "canvas-provider-376717"  #project ID
+  type = string
 }
 
 variable "region" {
