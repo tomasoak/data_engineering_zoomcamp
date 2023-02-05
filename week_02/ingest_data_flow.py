@@ -7,6 +7,8 @@ from sqlalchemy import create_engine
 from prefect import flow, task
 from prefect.tasks import task_input_hash
 
+from prefect_sqlalchemy import SqlAlchemyConnector
+
 
 @task(log_prints=True, retries=1, cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
 def extract(url: str):
@@ -29,12 +31,11 @@ def transform(df):
 
 
 @task(log_prints=True, retries=1)
-def ingest(df, table_name, user, password, host, port, db):
-    postgresql_url = f'postgresql://{user}:{password}@{host}:{port}/{db}'
-    engine = create_engine(postgresql_url)
-    engine.connect()
+def ingest(df, table_name):
+    connection_block = SqlAlchemyConnector.load("pg-local")
 
-    df.to_sql(name=table_name, con=engine, if_exists="append")
+    with connection_block.get_connection(begin=False) as engine:
+        df.to_sql(name=table_name, con=engine, if_exists="append")
 
 
 @flow(name="Sub-flow", log_prints=True)
@@ -44,26 +45,19 @@ def log_subflow(table_name: str):
 
 @flow()
 def main_flow(params):
-    user = 'root'
-    password = 'root'
-    host = 'localhost'
-    port = '5431'
-    db = 'ny_taxi'
     table_name = params.table_name
-
     url = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet"
 
     log_subflow(table_name)
-
     raw_data = extract(url)
     data = transform(raw_data)
-    ingest(data, table_name, user, password, host, port, db)
+    ingest(data, table_name)
     
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Prefect Orchestrator')
     parser.add_argument('--table_name', help='Table for Postgres')
-
     args = parser.parse_args()
 
     main_flow(args)
+    
