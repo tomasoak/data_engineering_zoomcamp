@@ -1,4 +1,6 @@
+*.env
 *.parquet*
+*.csv*
 *.json
 *tar.gz
 *google-cloud-sdk*
