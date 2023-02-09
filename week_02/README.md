@@ -10,3 +10,13 @@
 ```
 python3 -m pip install prefect prefect-sqlalchemy prefect-gcp
 ```
+
+### Prefect UI
+```bash
+prefect orion start
+```
+
+### Activate blocks
+```bash
+prefect block register -m prefect_gcp
+```
