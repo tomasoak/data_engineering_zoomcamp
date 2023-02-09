@@ -27,8 +27,9 @@ def transform(df = pd.DataFrame) -> pd.DataFrame:
 def write_local(df) -> Path:
   """Write DataFrame out locally as a csv file"""
   # Path.mkdir("data")
-  path = Path(f"yellow_taxi_trip.csv")
-  df.head(100).to_csv("yellow_taxi_trip.csv", index=False, sep=";")
+  path = Path(f"yellow_taxi_trip.parquet")
+  df.to_parquet(path)
+  # df.head(100).to_csv("yellow_taxi_trip.csv", index=False, sep=";")
 
   return path
 

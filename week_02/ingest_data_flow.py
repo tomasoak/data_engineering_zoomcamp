@@ -3,7 +3,6 @@ from datetime import timedelta
 import argparse
 
 import pandas as pd
-from sqlalchemy import create_engine
 from prefect import flow, task
 from prefect.tasks import task_input_hash
 
@@ -60,4 +59,3 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     main_flow(args)
-    
