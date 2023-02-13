@@ -20,3 +20,18 @@ prefect orion start
 ```bash
 prefect block register -m prefect_gcp
 ```
+
+### Deployment from Prefect
+```bash
+prefect deployment build <script_name.py:etl_parent_flow> -n <"name it">
+```
+
+### Apply the deployment 
+```bash
+prefect deployment apply etl_parent_flow-deployment.yaml
+```
+
+### After running from the UI 
+```bash
+prefect agent start --work-queue "default" 
+```
