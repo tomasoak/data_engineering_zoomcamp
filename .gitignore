@@ -7,3 +7,5 @@
 *.terraform*
 *venv*
 *terraform.tfstate*
+*.prefectignore*
+*__pycache__*
