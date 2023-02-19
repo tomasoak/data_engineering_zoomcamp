@@ -72,7 +72,7 @@ Likely associated with how WSL handles IPv4 addresses, as in this issue: WSL by 
 1. In a WSL terminal, run the command `ip addr` to find the subsystem IP
 2. While in WSL, start Prefect Orion with that IP address as host:
 ```bash
-prefect orion start --host 172.31.211.36
+prefect orion start --host 172.20.115.88
 ```
 3. While in WSL, set the Prefect API to that IP address. The exact code for this should be displayed when you start Prefect Orion in the step above.
 ```bash
