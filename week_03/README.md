@@ -135,3 +135,91 @@ B. Query performance:
   - Use approximate aggregation functions (eg. HyperLogLog++)
   - `ORDER` last
   - Place the table with largest number of rows first
+
+<br>
+
+### BigQuery Internals
+[Ref link](https://panoply.io/data-warehouse-guide/bigquery-architecture/)
+
+<br>
+
+### ML in BigQuery
+1. Create ML model, predict and evalute it
+```SQL
+-- CREATE A ML TABLE WITH APPROPRIATE TYPE
+CREATE OR REPLACE TABLE `canvas-provider-376717.taxi_trips.yellow_taxi_trip_ml` (
+  `passenger_count` INTEGER,
+  `trip_distance` FLOAT64,
+  `PULocationID` STRING,
+  `DOLocationID` STRING,
+  `payment_type` STRING,
+  `fare_amount` FLOAT64,
+  `tolls_amount` FLOAT64,
+  `tip_amount` FLOAT64
+  ) AS (
+  SELECT CAST(passenger_count AS INTEGER), trip_distance, cast(PULocationID AS STRING), 
+    CAST(DOLocationID AS STRING), CAST(payment_type AS STRING), fare_amount, tolls_amount, 
+    tip_amount
+  FROM `canvas-provider-376717.taxi_trips.yellow_taxi_trip_partitoned` WHERE fare_amount != 0
+);
+
+
+-- CREATE MODEL WITH DEFAULT SETTING
+CREATE OR REPLACE MODEL `canvas-provider-376717.taxi_trips.tip_model`
+OPTIONS
+(model_type='linear_reg',
+input_label_cols=['tip_amount'],
+DATA_SPLIT_METHOD='AUTO_SPLIT') AS
+SELECT * 
+FROM `canvas-provider-376717.taxi_trips.yellow_taxi_trip_ml`
+WHERE tip_amount IS NOT NULL;
+
+-- CHECK FEATURES
+SELECT * FROM ML.FEATURE_INFO(MODEL `canvas-provider-376717.taxi_trips.tip_model`);
+
+-- EVALUATE THE MODEL
+SELECT *
+FROM ML.EVALUATE(MODEL `canvas-provider-376717.taxi_trips.tip_model`,
+(SELECT *
+  FROM `canvas-provider-376717.taxi_trips.yellow_taxi_trip_ml`
+  WHERE tip_amount IS NOT NULL)
+);
+
+-- PREDICT AND EXPLAIN
+SELECT *
+FROM ML.EXPLAIN_PREDICT(MODEL `canvas-provider-376717.taxi_trips.tip_model`,
+  (SELECT *
+    FROM `canvas-provider-376717.taxi_trips.yellow_taxi_trip_ml`
+    WHERE tip_amount IS NOT NULL),
+  STRUCT(3 as top_k_features)
+);
+
+-- HYPER PARAM TUNNING
+CREATE OR REPLACE MODEL `canvas-provider-376717.taxi_trips.tip_hyperparam_model`
+OPTIONS
+  (model_type='linear_reg',
+  input_label_cols=['tip_amount'],
+  DATA_SPLIT_METHOD='AUTO_SPLIT',
+  num_trials=5,
+  max_parallel_trials=2,
+  l1_reg=hparam_range(0, 20),
+  l2_reg=hparam_candidates([0, 0.1, 1, 10])) AS
+    SELECT *
+    FROM `canvas-provider-376717.taxi_trips.yellow_taxi_trip_ml`
+    WHERE tip_amount IS NOT NULL;
+```
+
+2. ML Deployment 
+Steps:
+- gcloud auth login
+```bash
+bq --project_id taxi-rides-ny extract -m nytaxi.tip_model gs://taxi_ml_model/tip_model
+mkdir /tmp/model
+gsutil cp -r gs://taxi_ml_model/tip_model /tmp/model
+mkdir -p serving_dir/tip_model/1
+cp -r /tmp/model/tip_model/* serving_dir/tip_model/1
+docker pull tensorflow/serving
+docker run -p 8501:8501 --mount type=bind,source=pwd/serving_dir/tip_model,target= /models/tip_model -e MODEL_NAME=tip_model -t tensorflow/serving &
+curl -d '{"instances": [{"passenger_count":1, "trip_distance":12.2, "PULocationID":"193", "DOLocationID":"264", "payment_type":"2","fare_amount":20.4,"tolls_amount":0.0}]}' -X POST http://localhost:8501/v1/models/tip_model:predict
+http://localhost:8501/v1/models/tip_model
+```
