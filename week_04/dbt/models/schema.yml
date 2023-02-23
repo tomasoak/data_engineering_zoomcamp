@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: staging
+    database: canvas-provider-376717 
+    schema: taxi_trips  
+    tables:
+      - name: green_taxi_trip
+      - name: yellow_taxi_trip
+  
+  - name: local
+    database: ny_taxi
+    schema: public
+    tables:
+      - name: green_taxi_trip
+      - name: yellow_taxi_trip

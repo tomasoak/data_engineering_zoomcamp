@@ -1,0 +1,27 @@
+
+
+============================== 2023-02-23 20:17:15.518573 | 84426321-2f16-4c00-97d2-6fa9e59dc006 ==============================
+[0m20:17:15.518573 [info ] [MainThread]: Running with dbt=1.4.2
+[0m20:17:15.519529 [debug] [MainThread]: running dbt with arguments {'write_json': True, 'use_colors': True, 'printer_width': 80, 'version_check': True, 'partial_parse': True, 'static_parser': True, 'profiles_dir': '/home/tomasoak/.dbt', 'send_anonymous_usage_stats': True, 'quiet': False, 'no_print': False, 'cache_selected_only': False, 'project_name': 'de_zoom', 'skip_profile_setup': False, 'which': 'init', 'indirect_selection': 'eager'}
+[0m20:17:15.519776 [debug] [MainThread]: Tracking: tracking
+[0m20:17:15.528126 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f5dab448910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f5dab448580>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f5dab4484f0>]}
+[0m20:17:15.529134 [debug] [MainThread]: Starter project path: /home/tomasoak/dataeng_zoomcamp/venv/lib/python3.8/site-packages/dbt/include/starter_project
+[0m20:17:19.879189 [info ] [MainThread]: Profile de_zoom written to /home/tomasoak/.dbt/profiles.yml using target's sample configuration. Once updated, you'll be able to start developing with dbt.
+[0m20:17:19.879514 [info ] [MainThread]: 
+Your new dbt project "de_zoom" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m20:17:19.879828 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f5da9ca2760>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f5dab43a430>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f5dab482fa0>]}
+[0m20:17:19.880059 [debug] [MainThread]: Flushing usage events
