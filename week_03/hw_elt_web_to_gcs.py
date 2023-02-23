@@ -36,6 +36,13 @@ def load_gcs() -> None:
   """Load files to Google Cloud Storage"""
 
   gcp_block = GcsBucket.load("fhv-trip-data")
+  
+  # print(os.path.getsize( os.path.join(Path(), "data/fvh_tripdata_2019-01.csv.gz")))
+
+  # gcp_block.upload_from_path(
+  #             from_path = os.path.join(Path(), "data/fvh_tripdata_2019-02.csv.gz"),
+  #             to_path = "fvh_tripdata_2019-02.csv.gz"
+  #           )
 
   for files in os.walk("data/"):
     for file in files:
