@@ -7,6 +7,7 @@ sources:
     tables:
       - name: green_taxi_trip
       - name: yellow_taxi_trip
+      - name: yellow_taxi_trip_partitoned
   
   - name: local
     database: ny_taxi
