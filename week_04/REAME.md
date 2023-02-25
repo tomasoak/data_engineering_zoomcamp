@@ -17,6 +17,11 @@ Start dbt
 dbt init
 ```
 
+Set profile
+```bash
+code ~/.dbt/profiles.yml
+```
+
 Running first model
 ```bash
 dbt run --model models/example/my_first_dbt_model.sql
