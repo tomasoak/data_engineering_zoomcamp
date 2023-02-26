@@ -1,0 +1,24 @@
+de_zoom:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      threads: 4
+      host: localhost
+      port: 5431
+      user: roots
+      pass: X
+      dbname: ny_taxi
+      schema: public
+
+bigquery-de-zoomcamp:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: canvas-provider-XXX
+      dataset: taxi_trips
+      location: europe-north1
+      threads: 4
+      keyfile: /Users/tomas/Codes/dataeng_zoomcamp/canvas-XXXXXXX-XXXX.json
