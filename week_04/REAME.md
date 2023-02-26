@@ -26,3 +26,5 @@ Running first model
 ```bash
 dbt run --model models/example/my_first_dbt_model.sql
 ```
+
+[DBT packages](https://hub.getdbt.com)
