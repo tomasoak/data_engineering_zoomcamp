@@ -8,6 +8,9 @@ with tripdata as
   where vendorid is not null 
 )
 select 
+  -- identifiers
+  {{ dbt_utils.generate_surrogate_key(['vendorid']) }} as tripid,
+
   -- payment info
   cast(fare_amount as numeric) as fare_amount,
   cast(extra as numeric) as extra,
